@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c2e5a87f-7f0b-4807-a872-02bfa39dd072" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/views/location-info.jade" afterPath="$PROJECT_DIR$/app_server/views/location-info.jade" />
     </list>
     <ignored path="loc8r.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -217,7 +216,7 @@
       <workItem from="1465495997557" duration="1552000" />
       <workItem from="1465498912131" duration="3461000" />
       <workItem from="1465521633033" duration="9435000" />
-      <workItem from="1465821779908" duration="3236000" />
+      <workItem from="1465821779908" duration="3293000" />
     </task>
     <task id="LOCAL-00001" summary="Commit inicial.">
       <created>1465334231559</created>
@@ -254,11 +253,18 @@
       <option name="project" value="LOCAL" />
       <updated>1465824863684</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Se actualiza cordenadas de Domenica.">
+      <created>1465825969327</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1465825969327</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29695000" />
+    <option name="totallyTimeSpent" value="29752000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -326,7 +332,8 @@
     <MESSAGE value="Commit inicial." />
     <MESSAGE value="Se suben cambios capitulo 3." />
     <MESSAGE value="Se suben cambios capitulo 4." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se suben cambios capitulo 4." />
+    <MESSAGE value="Se actualiza cordenadas de Domenica." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se actualiza cordenadas de Domenica." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
