@@ -2,32 +2,28 @@
    Created by amcomaschi on 10/06/16.
 
 extends layout
+include _includes/sharedHTMLfunctions
 
 block content
     .row.page-header
         .col-lg-12
-            h1 Domenica
+            h1= pageHeaderTitle
     .row
         .col-xs-12.col-md-9
             .row
                 .col-xs-12.col-sm-6
                     p.rating
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star
-                        span.glyphicon.glyphicon-star-empty
-                    p San Juan 2552, Capital Federal
+                        +outputRating(rating)
+                    p #{address}
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title Horarios
+                            h2.panel-title #{openingTimesTitle}
                         .panel-body
-                            p Lunes a Viernes : 09:00 am - 11:00 pm
-                            p Sabados : 10:00 am - 11:00 pm
-                            p Domingos : cerrado
+                            each openTime in location.openingTimes
+                                p #{openTime}
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title Facilities
+                            h2.panel-title #{facilitiesTitle}
                         .panel-body
                             span.label.label-warning
                                 span.glyphicon.glyphicon-ok
