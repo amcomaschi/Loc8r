@@ -1,3 +1,85 @@
 //
    Created by amcomaschi on 10/06/16.
 
+extends layout
+
+block content
+    .row.page-header
+        .col-lg-12
+            h1 Domenica
+    .row
+        .col-xs-12.col-md-9
+            .row
+                .col-xs-12.col-sm-6
+                    p.rating
+                        span.glyphicon.glyphicon-star
+                        span.glyphicon.glyphicon-star
+                        span.glyphicon.glyphicon-star
+                        span.glyphicon.glyphicon-star
+                        span.glyphicon.glyphicon-star-empty
+                    p San Juan 2552, Capital Federal
+                    .panel.panel-primary
+                        .panel-heading
+                            h2.panel-title Horarios
+                        .panel-body
+                            p Lunes a Viernes : 09:00 am - 11:00 pm
+                            p Sabados : 10:00 am - 11:00 pm
+                            p Domingos : cerrado
+                    .panel.panel-primary
+                        .panel-heading
+                            h2.panel-title Facilities
+                        .panel-body
+                            span.label.label-warning
+                                span.glyphicon.glyphicon-ok
+                                | &nbsp; Tragos
+                            | &nbsp;
+                            span.label.label-warning
+                                span.glyphicon.glyphicon-ok
+                                | &nbsp; Minutas
+                            | &nbsp;
+                            span.label.label-warning
+                                span.glyphicon.glyphicon-ok
+                                | &nbsp; WiFi
+                            | &nbsp;
+                .col-xs-12.col-sm-6.location-map
+                    .panel.panel-primary
+                        .panel-heading
+                            h2.panel-title Mapa
+                        .panel-body
+                            img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,-0.9690884&zoom=17 & size = 400x350&sensor=false&markers=51.455041,-0.9690884&scale=2')
+            .row
+                .col-xs-12
+                    .panel.panel-primary.review-panel
+                        .panel-heading
+                            a.btn.btn-default.pull-right(href="/location/review/new") Deja tu opinion
+                            h2.panel-title Opiniones de clientes
+                        .panel-body.review-container
+                            .row
+                                .review
+                                    .well.well-sm.review-header
+                                        span.rating
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star
+                                        span.reviewAuthor Adrian kamycki
+                                        small.reviewTimestamp 10 de Junio 2016
+                                    .col-xs-12
+                                        p Que buen lugar, la comida exquisita, los licuados excelente y la conexion es realmente rapida.
+                            .row
+                                .review
+                                    .well.well-sm.review-header
+                                        span.rating
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star
+                                            span.glyphicon.glyphicon-star-empty
+                                            span.glyphicon.glyphicon-star-empty
+                                        span.reviewAuthor Ariel Comaschi
+                                        small.reviewTimestap 09 de Abril 2016
+                                    .col-xs-12
+                                        p La comida estuvo bien, platos abundantes pero elevado el precio, la conexion es muy buena.
+        .col-xs-12.col-md-3
+            p.lead Domenica es una clasica pizzeria ubicada en el pleno corazon de San Cristobal, sus tragos y licuados son excelentes,
+                   | no dejes de visitarnos.
