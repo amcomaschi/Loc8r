@@ -7,42 +7,40 @@ include _includes/sharedHTMLfunctions
 block content
     .row.page-header
         .col-lg-12
-            h1= pageHeaderTitle
+            h1= pageHeader.title
     .row
         .col-xs-12.col-md-9
             .row
                 .col-xs-12.col-sm-6
                     p.rating
-                        +outputRating(rating)
-                    p #{address}
+                        +outputRating(location.rating)
+                    p #{location.address}
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title #{openingTimesTitle}
+                            h2.panel-title #{location.name}
                         .panel-body
-                            each openTime in location.openingTimes
-                                p #{openTime}
+                            each time in location.openingTimes
+                                p
+                                    | #{time.days} :
+                                    if time.closed
+                                        |  Cerrado
+                                    else
+                                        |  #{time.opening} - #{time.closing}
                     .panel.panel-primary
                         .panel-heading
-                            h2.panel-title #{facilitiesTitle}
+                            h2.panel-title Comodidades
                         .panel-body
-                            span.label.label-warning
-                                span.glyphicon.glyphicon-ok
-                                | &nbsp; Tragos
-                            | &nbsp;
-                            span.label.label-warning
-                                span.glyphicon.glyphicon-ok
-                                | &nbsp; Minutas
-                            | &nbsp;
-                            span.label.label-warning
-                                span.glyphicon.glyphicon-ok
-                                | &nbsp; WiFi
-                            | &nbsp;
+                            each facility in location.facilities
+                                span.label.label-warning
+                                    span.glyphicon.glyphicon-ok
+                                    | &nbsp; #{facility}
+                                    | &nbsp;
                 .col-xs-12.col-sm-6.location-map
                     .panel.panel-primary
                         .panel-heading
                             h2.panel-title Mapa
                         .panel-body
-                            img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=-34.623832,-58.4036347&zoom=17&size=400x350&sensor=false&markers=-58.4036347,-34.623832&scale=2')
+                            img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.long}&zoom=17&size=400x350&sensor=false&markers=-58.4036347,-34.623832&scale=2')
             .row
                 .col-xs-12
                     .panel.panel-primary.review-panel
@@ -50,32 +48,16 @@ block content
                             a.btn.btn-default.pull-right(href="/location/review/new") Deja tu opinion
                             h2.panel-title Opiniones de clientes
                         .panel-body.review-container
-                            .row
-                                .review
-                                    .well.well-sm.review-header
-                                        span.rating
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star
-                                        span.reviewAuthor Adrian kamycki
-                                        small.reviewTimestamp 10 de Junio 2016
-                                    .col-xs-12
-                                        p Que buen lugar, la comida exquisita, los licuados excelente y la conexion es realmente rapida.
-                            .row
-                                .review
-                                    .well.well-sm.review-header
-                                        span.rating
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star
-                                            span.glyphicon.glyphicon-star-empty
-                                            span.glyphicon.glyphicon-star-empty
-                                        span.reviewAuthor Ariel Comaschi
-                                        small.reviewTimestap 09 de Abril 2016
-                                    .col-xs-12
-                                        p La comida estuvo bien, platos abundantes pero elevado el precio, la conexion es muy buena.
+                            each review in location.reviews
+                                .row
+                                    .review
+                                        .well.well-sm.review-header
+                                            span.rating
+                                                +outputRating(location.rating)
+                                            span.reviewAuthor #{review.author}
+                                            small.reviewTimestamp  #{review.timestamp}
+                                        .col-xs-12
+                                            p !{(review.reviewText).replace(/\n/g, '<br/>')}
         .col-xs-12.col-md-3
             p.lead Domenica es una clasica pizzeria ubicada en el pleno corazon de San Cristobal, sus tragos y licuados son excelentes,
                    | no dejes de visitarnos.

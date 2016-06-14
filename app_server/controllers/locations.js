@@ -36,24 +36,46 @@ module.exports.homelist = function (req, res) {
 /* GET 'Location info' page*/
 module.exports.locationInfo = function (req, res) {
     res.render('location-info', { title: 'Domenica',
-                                  pageHeader: {title: 'Domenica'},
+                                  pageHeader: { title: 'Domenica' },
                                   sidebar: 'dddddddddddddddddd',
                                   location: {
                                     name: 'Domenica',
                                     address: 'San Juan 2552, Capital Federal',
-                                    rating: 4,
                                     facilities: ['Cerveza', 'Pizzas', 'Wifi'],
                                     coords: {lat: -34.623832, long: -58.4036347},
-                                    openingTimes: ['Lunes a Viernes : 09:00 am - 11:00 pm', 'Sabados : 10:00 am - 11:00 pm', 'Domingos : cerrado'],
-                                    reviews: [{author: 'Adrian Kamycki',
-                                              rating: 3,
-                                              timestap: '10/05/2016',
-                                              reviewText: 'Que buen lugar !'}]
+                                    openingTimes: [{
+                                        days: 'Lunes - Viernes',
+                                        opening: '08:00 am',
+                                        closing: '11:00 pm',
+                                        closed: false
+                                    },{
+                                        days: 'Sabado',
+                                        opening: '10:00 am',
+                                        closing: '10:00 pm',
+                                        closed: false
+                                    },{
+                                        days: 'Domingo',
+                                        closed: true
+                                    }],
+                                    reviews: [{
+                                        author: 'Adrian Kamycki',
+                                        rating: 4,
+                                        timestamp: '10/05/2016',
+                                        reviewText: 'Que buen lugar !'
+                                    },{
+                                        author: 'Ariel Comaschi',
+                                        rating: 3,
+                                        timestamp: '22/05/2016',
+                                        reviewText: 'Me bueno el lugar, pero caro !'
+                                    }]
                                   }
                                 });
 };
 
 /* GET 'Add review' page */
 module.exports.addReview = function (req, res) {
-    res.render('location-review-form', { title: 'Add review'});
+    res.render('location-review-form', { title: 'Opiones de Domenica en Loc8r',
+                                         pageHeader: {title: 'Opinion de Domenica'
+                                         }
+    });
 };
