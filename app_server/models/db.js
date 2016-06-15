@@ -5,6 +5,11 @@ var mongoose = require( 'mongoose' );
 var gracefulShutdown;
 var dbURI = 'mongodb://localhost/Loc8r';
 
+// this is for use production live db
+if(process.env.NODE_ENV === 'production'){
+	dbURI = process.env.MONGOLAB_URI;
+}
+
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
