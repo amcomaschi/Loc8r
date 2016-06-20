@@ -127,9 +127,70 @@ module.exports.locationsReadOne = function (req, res) {
 };
 
 module.exports.locationsUpdateOne = function (req, res) {
-    sendJsonResponse(res, 200, { "status": "success"});
+    if(!req.params.locationId) {
+        sendJsonResponse(res, 404, {
+            "message": "Not found, locationId is required"
+        });
+        return;
+    }
+
+    Loc
+        .findById(req.params.locationId)
+        .select('-reviews -rating')
+        .exec(
+            function (err, location) {
+                if(!location){
+                    sendJsonResponse(res, 404, {
+                        "message": "locationId not found"
+                    });
+                }else if(err) {
+                    sendJsonResponse(res, 400, err);
+                    return;
+                }
+
+                location.name = req.params.name;
+                location.address = req.params.address;
+                location.facilities = req.body.facilities.split(",");
+                location.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+                location.openingTimes = [{
+                    days: req.body.days1,
+                    opening: req.body.opening1,
+                    closing: req.body.closing1,
+                    closed: req.body.closed1
+                }, {
+                    days: req.body.days2,
+                    opening: req.body.opening2,
+                    closing: req.body.closing2,
+                    closed: req.body.closed2
+                }];
+
+                location.save(function (err, location) {
+                    if(err){
+                        sendJsonResponse(res, 400, err);
+                    }else {
+                        sendJsonResponse(res, 200, location);
+                    }
+                });
+            }
+        );
 };
 
 module.exports.locationsDeleteOne = function (req, res) {
-    sendJsonResponse(res, 200, { "status": "success"});
+    var locationId = req.params.locationId;
+
+    if(locationId){
+        Loc
+            .findByIdAndRemove(locationId)
+            .exec(function (err, location) {
+                if(err){
+                    sendJsonResponse(res, 400, err);
+                    return;
+                }
+                sendJsonResponse(res, 200, null);
+            });
+    }else{
+        sendJsonResponse(res, 404, {
+            "message": "No locationId"
+        });
+    }
 };
