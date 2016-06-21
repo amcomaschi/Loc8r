@@ -9,7 +9,7 @@ var dbURI = 'mongodb://localhost/Loc8r';
 if(process.env.NODE_ENV === 'production'){
 	dbURI = process.env.MONGOLAB_URI;
 }
-dbURI = 'mongodb://amcomaschi:ZAQ12wsx@ds021462.mlab.com:21462/loc8r';
+//dbURI = 'mongodb://amcomaschi:ZAQ12wsx@ds021462.mlab.com:21462/loc8r';
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {

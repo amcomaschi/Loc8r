@@ -70,13 +70,13 @@ module.exports.locationsCreate = function (req, res) {
 
 module.exports.locationsListByDistance = function (req, res) {
 
-    console.log("Lng: " + req.query.lng + "\nLat: " + req.query.lat + "\nDistance: " +req.query.distance);
+    console.log("Lng: " + req.query.lng + "\nLat: " + req.query.lat + "\nDistance: " +req.query.maxDistance);
 
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
     var geoOptions = {
         spherical: true,
-        maxDistance: theEarth.getRadsFromDistance(req.query.distance),
+        maxDistance: theEarth.getRadsFromDistance(req.query.maxDistance),
         num: 10
     };
     var point = {
@@ -84,7 +84,7 @@ module.exports.locationsListByDistance = function (req, res) {
         coordinates: [lng, lat]
     };
 
-    if(!lng || !lat){
+    if((!lng && lng !==0) || (!lat && lat!==0)){
         sendJsonResponse(res, 404, {
             "meesage": "lng and lat parameters are required"
         });
