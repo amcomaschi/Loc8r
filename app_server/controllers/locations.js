@@ -30,8 +30,7 @@ var renderHomepage = function (req, res, responseBody) {
 			title: "Loc8r",
 			strapline: "Encuentra lugares con wifi cerca tuyo para terminar tu trabajo !"
 		},
-		sidebar: "Buscar un buen lugar para almorzar y tomar un trago, venite a Domenica. Contamos con una " +
-		"conexion super rapida.",
+		sidebar: "Buscar un buen lugar para almorzar, tomar un trago y terminar tu trabajo con la mejor velocidad de conexion.",
 		locations: responseBody,
 		message: message
 	});
@@ -50,7 +49,7 @@ module.exports.homelist = function (req, res) {
 		qs : {
 			lng : -0.969083,
 			lat : 51.455069,
-			maxDistance : 30
+			maxDistance : 30000
 		}
 	};
 
@@ -85,42 +84,34 @@ var _formatDistance = function (distance) {
 
 /* GET 'Location info' page*/
 module.exports.locationInfo = function (req, res) {
-	res.render('location-info', { title: 'Domenica',
-		pageHeader: { title: 'Domenica' },
-		sidebar: 'dddddddddddddddddd',
-		location: {
-			name: 'Domenica',
-			address: 'San Juan 2552, Capital Federal',
-			facilities: ['Cerveza', 'Pizzas', 'Wifi'],
-			coords: {lat: -34.623832, long: -58.4036347},
-			openingTimes: [{
-				days: 'Lunes - Viernes',
-				opening: '08:00 am',
-				closing: '11:00 pm',
-				closed: false
-			},{
-				days: 'Sabado',
-				opening: '10:00 am',
-				closing: '10:00 pm',
-				closed: false
-			},{
-				days: 'Domingo',
-				closed: true
-			}],
-			reviews: [{
-				author: 'Adrian Kamycki',
-				rating: 4,
-				timestamp: '10/05/2016',
-				reviewText: 'Que buen lugar !'
-			},{
-				author: 'Ariel Comaschi',
-				rating: 3,
-				timestamp: '22/05/2016',
-				reviewText: 'Me bueno el lugar, pero caro !'
-			}]
-		}
-	});
+	var requestOptions, path;
+	path = "/api/locations/" + req.params.locationId;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+
+	request(requestOptions, function (err, response, body) {
+		var data = body;
+		data.coords = {
+			lng : body.coords[0],
+			lat : body.coords[1]
+		};
+
+		renderDetailPage(req, res, data);
+	})
 };
+
+var renderDetailPage = function (req, res, locDetail) {
+	console.log("RenderDetailPage");
+
+	res.render('location-info', { title: locDetail.name,
+		pageHeader: { title: locDetail.name },
+		sidebar: 'Buscar un buen lugar para almorzar, tomar un trago y terminar tu trabajo con la mejor velocidad de conexion.',
+		location: locDetail
+	});
+}
 
 /* GET 'Add review' page */
 module.exports.addReview = function (req, res) {
