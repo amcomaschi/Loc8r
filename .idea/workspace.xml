@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2e5a87f-7f0b-4807-a872-02bfa39dd072" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/validation.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/controllers/reviews.js" afterPath="$PROJECT_DIR$/app_api/controllers/reviews.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/models/locations.js" afterPath="$PROJECT_DIR$/app_api/models/locations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/controllers/locations.js" afterPath="$PROJECT_DIR$/app_server/controllers/locations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/routes/index.js" afterPath="$PROJECT_DIR$/app_server/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/views/_includes/sharedHTMLfunctions.jade" afterPath="$PROJECT_DIR$/app_server/views/_includes/sharedHTMLfunctions.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/views/layout.jade" afterPath="$PROJECT_DIR$/app_server/views/layout.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/views/location-info.jade" afterPath="$PROJECT_DIR$/app_server/views/location-info.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/views/location-review-form.jade" afterPath="$PROJECT_DIR$/app_server/views/location-review-form.jade" />
     </list>
     <ignored path="loc8r.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -348,7 +339,7 @@
       <workItem from="1466215356932" duration="4284000" />
       <workItem from="1466281145630" duration="2109000" />
       <workItem from="1466523442321" duration="9707000" />
-      <workItem from="1466708733679" duration="3000" />
+      <workItem from="1466708733679" duration="89000" />
     </task>
     <task id="LOCAL-00001" summary="Commit inicial.">
       <created>1465334231559</created>
@@ -413,11 +404,18 @@
       <option name="project" value="LOCAL" />
       <updated>1466018059946</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Se actualiza por capitulo 7.">
+      <created>1466708750494</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1466708750494</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82309000" />
+    <option name="totallyTimeSpent" value="82395000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -469,7 +467,8 @@
     <MESSAGE value="Se actualiza cordenadas de Domenica." />
     <MESSAGE value="Se actualiza por capitulo 5." />
     <MESSAGE value="Se actualiza por capitulo 5, mongoose." />
-    <option name="LAST_COMMIT_MESSAGE" value="Se actualiza por capitulo 5, mongoose." />
+    <MESSAGE value="Se actualiza por capitulo 7." />
+    <option name="LAST_COMMIT_MESSAGE" value="Se actualiza por capitulo 7." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
