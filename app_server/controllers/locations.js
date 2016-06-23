@@ -84,6 +84,12 @@ var _formatDistance = function (distance) {
 
 /* GET 'Location info' page*/
 module.exports.locationInfo = function (req, res) {
+	getLocationInfo(req, res, function (req, res, responseData) {
+		renderDetailPage(req, res, responseData);
+	})
+};
+
+var getLocationInfo = function (req, res, callback) {
 	var requestOptions, path;
 	path = "/api/locations/" + req.params.locationId;
 	requestOptions = {
@@ -94,14 +100,20 @@ module.exports.locationInfo = function (req, res) {
 
 	request(requestOptions, function (err, response, body) {
 		var data = body;
-		data.coords = {
-			lng : body.coords[0],
-			lat : body.coords[1]
-		};
 
-		renderDetailPage(req, res, data);
+		if(response.statusCode === 200) {
+			console.log(body);
+			data.coords = {
+				lng: body.coords[0],
+				lat: body.coords[1]
+			};
+
+			callback(req, res, data);
+		} else {
+			_showError(req, res, response.statusCode);
+		}
 	})
-};
+}
 
 var renderDetailPage = function (req, res, locDetail) {
 	console.log("RenderDetailPage");
@@ -115,8 +127,62 @@ var renderDetailPage = function (req, res, locDetail) {
 
 /* GET 'Add review' page */
 module.exports.addReview = function (req, res) {
-	res.render('location-review-form', { title: 'Opiones de Domenica en Loc8r',
-		pageHeader: {title: 'Opinion de Domenica'
-		}
-	});
+	getLocationInfo(req, res, function (req, res, responseData) {
+		renderReviewForm(req, res, responseData);
+	})
 };
+
+var renderReviewForm = function (req, res, responseData) {
+	res.render('location-review-form', { title: 'Opiones de ' + responseData.name + ' en Loc8r',
+		pageHeader: {title: responseData.name	},
+		error : req.query.err
+	});
+}
+
+module.exports.doAddReview = function(req, res){
+	var requestOptions, path, locationId, postdata;
+
+	locationId = req.params.locationId;
+	path = "/api/locations/" + locationId + '/reviews';
+	postdata = {
+		author : req.body.name,
+		rating : parseInt(req.body.rating, 10),
+		reviewText : req.body.review
+	};
+
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : 'POST',
+		json : postdata
+	};
+
+	if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+		res.redirect('/location/' + locationId + '/reviews/new?err=val');
+	} else {
+		request(requestOptions, function (err, response, body) {
+			if (response.statusCode === 201) {
+				res.redirect('/location/' + locationId);
+			} else if (response.statusCode === 400 && body.name && body.name === "ValidationError") {
+				res.redirect('/location/' + locationId + '/reviews/new?err=val')
+			} else {
+				_showError(req, res, response.statusCode);
+			}
+		});
+	}
+};
+
+var _showError = function (req, res, status) {
+	var title, content;
+	if (status === 404) {
+		title = "404, page not found";
+		content = "Oh dear. Looks like we can't find this page. Sorry.";
+	} else {
+		title = status + ", something's gone wrong";
+		content = "Something, somewhere, has gone just a little bit wrong.";
+	}
+	res.status(status);
+	res.render('generic-text', {
+		title : title,
+		content : content
+	});
+}

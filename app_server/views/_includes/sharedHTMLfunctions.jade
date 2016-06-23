@@ -2,7 +2,18 @@
    Created by amcomaschi on 13/06/16.
 
 mixin outputRating(rating)
+    - console.log("Rating: " + rating);
     - for (var i = 1; i <= rating; i++)
         span.glyphicon.glyphicon-star
     - for (i = rating; i < 5; i++)
         span.glyphicon.glyphicon-star-empty
+
+
+mixin formatDate(dateString)
+    -var date = new Date(dateString);
+    -var monthName = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Novienmbre", "Diciembre"];
+    -var d = date.getDay();
+    -var m = monthName[date.getMonth()];
+    -var y = date.getFullYear();
+    -var output = d + ' ' + m + ' ' + y
+    =output

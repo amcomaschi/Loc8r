@@ -1,6 +1,8 @@
 /**
  * Created by ariel on 16/06/16.
  */
+var mongoose = require('mongoose');
+var Loc = mongoose.model('Location');
 
 var sendJsonResponse = function(res, status, content) {
     res.status(status);
@@ -57,6 +59,7 @@ var doAddReview = function(req, res, location){
             var thisReview;
 
             if(err){
+                console.log(err);  
                 sendJsonResponse(res, 400, err);
             }else{
                 updateAverageRating(location._id);
