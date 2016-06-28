@@ -9,7 +9,7 @@ block content
             h1= pageHeader.title
         .row
             .col-xs-12.col-md-6
-                form.form-horizontal(id="addReview" action="", method="post", role="form")
+                form.form-horizontal(id="addReview" action="#{url}", method="post", role="form")
                     - if (error == "val")
                         .alert.alert-danger(role="alert") Todos los campos son requeridos, por favor intentar nuevamente.
                     .form-group
