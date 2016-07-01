@@ -44,14 +44,14 @@ var doSetAverageRating = function (location) {
     }
 };
 
-var doAddReview = function(req, res, location){
+var doAddReview = function(req, res, location, author){
     if(!location){
         sendJsonResponse(res, 404, {
             "message": "locationId not found"
         });
     }else{
         location.reviews.push({
-            author: req.body.author,
+            author: author,
             rating: req.body.rating,
             reviewText: req.body.reviewText
         });
@@ -71,24 +71,26 @@ var doAddReview = function(req, res, location){
 }
 
 module.exports.reviewsCreate = function (req, res) {
-    var locationId = req.params.locationId;
+    getAuthor(req, res, function (req, res, userName) {
+        var locationId = req.params.locationId;
 
-    if(locationId){
-        Loc.findById(locationId)
-            .select('reviews')
-            .exec(
+        if (locationId) {
+            Loc.findById(locationId)
+              .select('reviews')
+              .exec(
                 function (err, location) {
-                    if(err){
+                    if (err) {
                         sendJsonResponse(res, 400, err);
-                    }else{
-                        doAddReview(req, res, location);
+                    } else {
+                        doAddReview(req, res, location, userName);
                     }
-            })
-    }else{
-        sendJsonResponse(res, 404, {
-            "message": "Not found, locationId required"
-        });
-    }
+                })
+        } else {
+            sendJsonResponse(res, 404, {
+                "message": "Not found, locationId required"
+            });
+        }
+    });
 };
 
 module.exports.reviewsReadOne = function (req, res) {
@@ -232,4 +234,30 @@ module.exports.reviewsDeleteOne = function (req, res) {
                     });
                 }
             });
+};
+
+var User = mongoose.model('User');
+var getAuthor = function(req, res, callback) {
+    if (req.payload && req.payload.email) {
+        User
+          .findOne({ email : req.payload.email })
+          .exec(function(err, user) {
+              if (!user) {
+                  sendJSONresponse(res, 404, {
+                      "message": "User not found"
+                  });
+                  return;
+              } else if (err) {
+                  console.log(err);
+                  sendJSONresponse(res, 404, err);
+                  return;
+              }
+              callback(req, res, user.name);
+          });
+    } else {
+        sendJSONresponse(res, 404, {
+            "message": "User not found"
+        });
+        return;
+    }
 };
